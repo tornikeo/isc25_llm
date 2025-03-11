@@ -1,0 +1,14 @@
+# General requirements
+torch>=2.0.0
+transformers>=4.36.0
+datasets>=2.14.0
+peft>=0.6.0
+accelerate>=0.24.0
+bitsandbytes>=0.41.0
+scipy>=1.11.0
+tqdm
+evaluate
+
+# Hardware-specific requirements (install as needed)
+#intel-extension-for-pytorch  # Only if using Intel GPUs
+#torch-rocm                  # Only if using AMD GPUs
