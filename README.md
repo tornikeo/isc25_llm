@@ -6,11 +6,11 @@ Welcome to the ISC25 Student Cluster Competition! This year's challenge focuses 
 
 ## Competition Tasks
 ### 1. Speed Benchmark
-- **Objective**: Achieve as high number of token per second as possible
+- **Objective**: Achieve as high number of tokens per second as possible
 - **Dataset**: CosmosQA will be given for practicing at home.
 - **Measurement**: `train_samples_per_second`
-- Team has freedom to fine-tuning on the given dataset with any split.
-- Team has freedom to run as many epochs as they want.
+- Teams have the freedom to fine-tune on the given dataset with any split.
+- Teams have the freedom to run as many epochs as they want (one epoch at the least).
 
 ### 2. Accuracy Benchmark
 - **Objective**: Achieve highest accuracy on evaluation dataset with the fine-tuned model from (1)
@@ -28,10 +28,10 @@ Welcome to the ISC25 Student Cluster Competition! This year's challenge focuses 
 3. **Technical Report (20%)**
    - Summary of optimization techniques
    - Discussion of trade-offs and decisions
-   - Max 500 words, a template is provided in the report.md
+   - Max 500 words; a template is provided in the report.md
 
 ### Optimization Freedom
-Teams are encouraged to explore various optimization techniques including but not limited to:
+Teams are encouraged to explore various optimization techniques, including but not limited to:
 - Model optimization (quantization, LoRA configurations)
 - Training strategies (learning rates, batch sizes)
 - System optimizations (memory management, I/O optimization)
@@ -123,7 +123,7 @@ Please register an account at [HuggingFace](https://huggingface.co/) and [obtain
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/phu0ngng/isc25_llama_lora.git
+git clone https://github.com/phu0ngng/isc25_llm.git
 cd isc25_llama_lora
 ```
 
@@ -205,7 +205,7 @@ isc25_llm/
     ├── lora_model.py   # LoRA implementation
     └── trainer.py      # Trainer
 ```
-## Submission Instruction
+## Submission Instructions
 
 Teams must submit:
 1. Final model checkpoint
@@ -213,7 +213,7 @@ Teams must submit:
 3. Configuration files
 4. Brief report detailing optimizations used
 
-Please submit a zip file which include the all files and directory following this hiarachy
+Please submit a zip file that includes all the files and directories following this hierarchy
 ```
 isc25_llm/
 ├── report.md           # Template report
@@ -250,4 +250,4 @@ tar -czvf isc25_llm_team_name.tar.gz /path/to/isc25_llm
 
 
 For questions or issues, please contact the competition organizers.
-Good luck, and may the best optimized model win!
+Good luck, and may the best-optimized model win!
