@@ -6,7 +6,7 @@ Welcome to the ISC25 Student Cluster Competition! This year's challenge focuses 
 
 ## Competition Tasks
 ### 1. Speed Benchmark
-- **Objective**: Achieve as high number of tokens per second as possible
+- **Objective**: Achieve as high number of train sample per second as possible
 - **Dataset**: CosmosQA will be given for practicing at home. A new train dataset will be given at the competition.
 - **Measurement**: `train_samples_per_second`
 - Teams have the freedom to fine-tune on the given dataset with any split.
@@ -32,11 +32,13 @@ Welcome to the ISC25 Student Cluster Competition! This year's challenge focuses 
 
 ### Optimization Freedom
 Teams are encouraged to explore various optimization techniques, including but not limited to:
-- Model optimization (quantization, LoRA configurations)
+- Model optimization (parallelism, quantization, etc).
+- LoRA configurations (parameter tuning or any types of LoRA (qLoRA, DoRA, etc))
 - Training strategies (learning rates, batch sizes)
 - System optimizations (memory management, I/O optimization)
 - Hardware-specific optimizations
-- Using [TransformerEngine](https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/examples/te_llama/tutorial_accelerate_hf_llama_with_te.html) is encouraged.
+- Using [TransformerEngine](https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/examples/te_llama/tutorial_accelerate_hf_llama_with_te.html).
+- Other PyTorch-based extensions.
 
 The only constraints are:
 - Must use PyTorch as the base framework
@@ -60,13 +62,13 @@ hardware.
 ### NVIDIA GPUs
 ```bash
 # Pull the container
-docker pull nvcr.io/nvidia/pytorch:24.01-py3
+docker pull nvcr.io/nvidia/pytorch:25.01-py3
 
 # Run with NVIDIA Container Runtime
 docker run --gpus all \
     --runtime=nvidia \
     -v ${PWD}:/workspace \
-    nvcr.io/nvidia/pytorch:24.01-py3
+    nvcr.io/nvidia/pytorch:25.01-py3
 ```
 
 ### AMD GPUs
