@@ -7,22 +7,22 @@ Welcome to the ISC25 Student Cluster Competition! This year's challenge focuses 
 ## Competition Tasks
 ### 1. Speed Benchmark
 - **Objective**: Achieve as high number of tokens per second as possible
-- **Dataset**: CosmosQA will be given for practicing at home.
+- **Dataset**: CosmosQA will be given for practicing at home. A new train dataset will be given at the competition.
 - **Measurement**: `train_samples_per_second`
 - Teams have the freedom to fine-tune on the given dataset with any split.
 - Teams have the freedom to run as many epochs as they want (one epoch at the least).
 
 ### 2. Accuracy Benchmark
 - **Objective**: Achieve highest accuracy on evaluation dataset with the fine-tuned model from (1)
-- **Evaluation Dataset**: ScienceQA will be given for practicing at home.
+- **Evaluation Dataset**: ScienceQA will be given for practicing at home. A new evalulate dataset will be given at the competition.
 
 ### Evaluation Criteria
 1. **Speed Benchmark (30%)**
-   - Fastest time to reach specified loss threshold
+   - Highest `train_samples_per_second` on the train dataset
    - Must provide reproducible results
 
 2. **Accuracy Benchmark (50%)**
-   - Highest accuracy on ScienceQA evaluation dataset
+   - Highest accuracy on the evaluation dataset
    - Must provide checkpoint for verification
 
 3. **Technical Report (20%)**
@@ -185,7 +185,9 @@ All configuration parameters can be found in `config.py`. Key parameters include
 For practicing at home, two datasets will be given:
 1. For Fine-Tuning - CosmosQA: The Cosmos QA dataset is a large-scale collection of 35,600 problems designed to test commonsense-based reading comprehension. It presents multiple-choice questions that require interpreting the likely causes and effects of events in everyday narratives, often necessitating reasoning beyond the explicit text content.
 
-2. Accuracy Benchmark - ScienceQA: The ScienceQA dataset consists of approximately 21,208 multimodal multiple-choice science questions, covering various topics across natural, language, and social sciences. It includes both image and text contexts, with detailed annotations to support understanding the reasoning behind answers. This structure makes it a valuable tool for assessing and improving AI's reasoning capabilities.
+2. Accuracy Benchmark - ScienceQA: The ScienceQA dataset consists of approximately 21,208 multimodal multiple-choice science questions, covering various topics across natural, language, and social sciences. It includes both image and text contexts, with detailed annotations to support understanding the reasoning behind answers. This structure makes it a valuable tool for assessing and improving AI's reasoning capabilities. For the scope of the competition, all the images-based questions are removed thus only text-based questions are used.
+
+New datasets will be given at the competition.
 
 ## Directory Structure
 This repository provides a reference implementation for fine-tuning LLaMA 3.1 8B with LoRA using
