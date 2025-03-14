@@ -37,7 +37,16 @@ class CausalLMMultipleChoiceDataset(Dataset):
         if dataset_name == "lmms-lab/ScienceQA":
             self.dataset = load_dataset(
                 dataset_name, "ScienceQA-FULL", split=split, trust_remote_code=True
-                )
+            )
+            # Filter out questions with images
+            original_length = len(self.dataset)
+            self.dataset = self.dataset.filter(
+                lambda example: example["image"] is None or example["image"] == ""
+            )
+            new_length = len(self.dataset)
+            logging.info(
+                f"Removed {original_length - new_length} examples with images. New dataset length: {new_length}"
+            )
         else:
             self.dataset = load_dataset(
                 dataset_name, split=split, trust_remote_code=True
