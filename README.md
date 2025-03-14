@@ -7,22 +7,22 @@ Welcome to the ISC25 Student Cluster Competition! This year's challenge focuses 
 ## Competition Tasks
 ### 1. Speed Benchmark
 - **Objective**: Achieve as high number of tokens per second as possible
-- **Dataset**: CosmosQA will be given for practicing at home.
+- **Dataset**: CosmosQA will be given for practicing at home. A new train dataset will be given at the competition.
 - **Measurement**: `train_samples_per_second`
 - Teams have the freedom to fine-tune on the given dataset with any split.
 - Teams have the freedom to run as many epochs as they want (one epoch at the least).
 
 ### 2. Accuracy Benchmark
 - **Objective**: Achieve highest accuracy on evaluation dataset with the fine-tuned model from (1)
-- **Evaluation Dataset**: ScienceQA will be given for practicing at home.
+- **Evaluation Dataset**: ScienceQA will be given for practicing at home. A new evalulate dataset will be given at the competition.
 
 ### Evaluation Criteria
 1. **Speed Benchmark (30%)**
-   - Fastest time to reach specified loss threshold
+   - Highest `train_samples_per_second` on the train dataset
    - Must provide reproducible results
 
 2. **Accuracy Benchmark (50%)**
-   - Highest accuracy on ScienceQA evaluation dataset
+   - Highest accuracy on the evaluation dataset
    - Must provide checkpoint for verification
 
 3. **Technical Report (20%)**
