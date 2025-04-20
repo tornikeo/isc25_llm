@@ -66,11 +66,16 @@ class LoRAModel:
         model, tokenizer = self.setup_model(local_rank)
 
         # Load checkpoint to CPU first to avoid GPU memory issues
-        checkpoint = torch.load(checkpoint_path, map_location="cpu")
+        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
 
         # Load model state dict
         if "model_state_dict" in checkpoint:
+            # When the entire model is saved
             model.load_state_dict(checkpoint["model_state_dict"], strict=False)
+        elif "lora_state_dict" in checkpoint:
+            print(f"Loading LoRA weights from team: {checkpoint["team_name"]}")
+            # When only the lora weights are saved
+            model.load_state_dict(checkpoint["lora_state_dict"], strict=False)
         else:
             model.load_state_dict(
                 checkpoint, strict=False

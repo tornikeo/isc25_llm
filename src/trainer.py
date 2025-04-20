@@ -6,7 +6,7 @@ import torch
 from transformers import Trainer, TrainingArguments
 from .dataset import get_data_collator
 from .evaluation import CausalLMEvaluator
-
+from peft import get_peft_model_state_dict
 
 logger = logging.getLogger(__name__)
 
@@ -26,6 +26,7 @@ class CustomTrainer:
         training_args = TrainingArguments(
             output_dir=self.config.checkpoint_dir,
             num_train_epochs=self.config.num_epochs,
+            max_steps=self.config.max_steps,
             per_device_train_batch_size=self.config.batch_size,
             gradient_accumulation_steps=self.config.gradient_accumulation_steps,
             optim="adamw_torch_fused",
@@ -80,16 +81,17 @@ class CustomTrainer:
 
         # Save model state
         checkpoint = {
+            "team_name": os.environ.get("TEAM_NAME", "Default"),
             "epoch": epoch,
             # 'optimizer_state_dict': self.optimizer.state_dict(),
             # We need these two to verify your submission
-            "model_state_dict": self.model.state_dict(),
+            "lora_state_dict": get_peft_model_state_dict(self.model),
             "config": self.config,
         }
 
         # Regular checkpoint
         checkpoint_path = os.path.join(
-            self.config.checkpoint.dir, "best_model.pt"
+            self.config.checkpoint.dir, "best_model_lora.pt"
         )
         logger.info("Checkpointing from local_rank = 0 ...")
         torch.save(checkpoint, checkpoint_path)
