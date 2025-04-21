@@ -73,7 +73,7 @@ class LoRAModel:
             # When the entire model is saved
             model.load_state_dict(checkpoint["model_state_dict"], strict=False)
         elif "lora_state_dict" in checkpoint:
-            print(f"Loading LoRA weights from team: {checkpoint["team_name"]}")
+            print("Loading LoRA weights!")
             # When only the lora weights are saved
             model.load_state_dict(checkpoint["lora_state_dict"], strict=False)
         else:

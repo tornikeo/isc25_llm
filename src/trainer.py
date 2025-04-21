@@ -81,7 +81,6 @@ class CustomTrainer:
 
         # Save model state
         checkpoint = {
-            "team_name": os.environ.get("TEAM_NAME", "Default"),
             "epoch": epoch,
             # 'optimizer_state_dict': self.optimizer.state_dict(),
             # We need these two to verify your submission
