@@ -79,7 +79,7 @@ def main():
         logger.info("Loading checkpoint from %s", args.checkpoint)
         if os.path.isdir(checkpoint_path):
             # If directory, load the best model
-            checkpoint_path = os.path.join(checkpoint_path, "best_model.pt")
+            checkpoint_path = os.path.join(checkpoint_path, "best_model_lora.pt")
 
         if not os.path.exists(checkpoint_path):
             raise ValueError(f"Checkpoint not found: {checkpoint_path}")
@@ -88,6 +88,7 @@ def main():
     else:
         logger.info("Initializing new model")
         model, tokenizer = model_handler.setup_model(local_rank)
+
 
     DistributedSetup.barrier()
 
@@ -152,3 +153,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

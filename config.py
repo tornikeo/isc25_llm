@@ -89,6 +89,7 @@ class TrainingConfig:
     num_epochs: int = 2
     gradient_accumulation_steps: int = 4
     max_length = 512
+    max_steps = 1 # set to 1 for debug
 
     checkpoint_freq: int = 1
     checkpoint_dir: str = "checkpoints"
