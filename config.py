@@ -15,7 +15,6 @@ class CacheConfig:
         self.hf_token = os.environ.get("HF_TOKEN", self.hf_token)
 
 
-# Please do not modify the PromptConfig
 @dataclass
 class PromptConfig:
     template: str = """Context: {context}

@@ -20,7 +20,7 @@ class CausalLMEvaluator:
 
         self.model.eval()  # Set model to evaluation mode
 
-    # Please to not modify the evaluate function
+    # Please do not modify the evaluate function
     def evaluate(self, dataset, batch_size=8):
         """
         Memory-optimized evaluation
