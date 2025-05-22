@@ -323,6 +323,7 @@ python -c "import torch; print(torch.cuda.is_available())"
 ```sh
 git clone https://github.com/tornikeo/isc25_llm.git
 cd isc25_llm
+# Or ln -s /home/fausion/isc25_llm .
 pip install -r requirements.txt
 
 # nproc_per_node must be 4, because we have access to 4 GPUs, in this 
@@ -342,3 +343,26 @@ You will get an SSL error. Try this:
 ```sh
 Apptainer> export CURL_CA_BUNDLE=
 ```
+
+# Compressed way
+
+```sh
+mkdir -p /scratch/tornikeo/workdir
+mkdir -p /scratch/tornikeo/tmp
+mkdir -p /scratch/tornikeo/cache
+export APPTAINER_TMPDIR=/scratch/tornikeo/tmp
+export APPTAINER_CACHEDIR=/scratch/tornikeo/cache
+cd /scratch/tornikeo/workdir
+module load container/apptainer/1.4.0
+apptainer pull docker://nvcr.io/nvidia/pytorch:25.01-py3 || true
+apptainer exec --workdir /scratch/tornikeo/workdir   --nv pytorch_25.01-py3.sif bash
+```
+
+```sh
+cd isc25_llm
+pip install -r requirements.txt
+```
+
+TODO: cosmos_qa can't be loaded from the web. SSL error. What the hell. 
+
+Avoid modifying code as much as possible before this gets fixed.

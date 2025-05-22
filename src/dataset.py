@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 import logging
 
 import torch
-from datasets import load_dataset
+from datasets import load_dataset, load_from_disk
 from torch.utils.data import Dataset
 from transformers import PreTrainedTokenizer
 from config import PromptConfig
