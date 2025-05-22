@@ -12,3 +12,5 @@ evaluate
 # Hardware-specific requirements (install as needed)
 #intel-extension-for-pytorch  # Only if using Intel GPUs
 #torch-rocm                  # Only if using AMD GPUs
+
+python-dotenv

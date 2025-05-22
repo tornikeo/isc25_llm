@@ -2,7 +2,9 @@ import os
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 import torch
+from dotenv import load_dotenv
 
+load_dotenv()
 
 @dataclass
 class CacheConfig:
