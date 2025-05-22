@@ -321,7 +321,7 @@ python -c "import torch; print(torch.cuda.is_available())"
 # ML part
 
 ```sh
-git clone https://github.com/phu0ngng/isc25_llm.git
+git clone https://github.com/tornikeo/isc25_llm.git
 cd isc25_llm
 pip install -r requirements.txt
 
