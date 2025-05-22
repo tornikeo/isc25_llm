@@ -1,0 +1,86 @@
+{
+  "builder_name": "cosmos_qa",
+  "citation": "@inproceedings{huang-etal-2019-cosmos,\n    title = \"Cosmos {QA}: Machine Reading Comprehension with Contextual Commonsense Reasoning\",\n    author = \"Huang, Lifu  and\n      Le Bras, Ronan  and\n      Bhagavatula, Chandra  and\n      Choi, Yejin\",\n    booktitle = \"Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)\",\n    month = nov,\n    year = \"2019\",\n    address = \"Hong Kong, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/D19-1243\",\n    doi = \"10.18653/v1/D19-1243\",\n    pages = \"2391--2401\",\n}\n",
+  "config_name": "default",
+  "dataset_name": "cosmos_qa",
+  "dataset_size": 24463841,
+  "description": "Cosmos QA is a large-scale dataset of 35.6K problems that require commonsense-based reading comprehension, formulated as multiple-choice questions. It focuses on reading between the lines over a diverse collection of people's everyday narratives, asking questions concerning on the likely causes or effects of events that require reasoning beyond the exact text spans in the context\n",
+  "download_checksums": {
+    "https://github.com/wilburOne/cosmosqa/raw/master/data/train.csv": {
+      "num_bytes": 16660449,
+      "checksum": null
+    },
+    "https://github.com/wilburOne/cosmosqa/raw/master/data/test.jsonl": {
+      "num_bytes": 5610681,
+      "checksum": null
+    },
+    "https://github.com/wilburOne/cosmosqa/raw/master/data/valid.csv": {
+      "num_bytes": 2128345,
+      "checksum": null
+    }
+  },
+  "download_size": 24399475,
+  "features": {
+    "id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "context": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "question": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer0": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer1": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer2": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer3": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "int32",
+      "_type": "Value"
+    }
+  },
+  "homepage": "https://wilburone.github.io/cosmos/",
+  "license": "CC BY 4.0",
+  "size_in_bytes": 48863316,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 17156676,
+      "num_examples": 25262,
+      "dataset_name": "cosmos_qa"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 5120580,
+      "num_examples": 6963,
+      "dataset_name": "cosmos_qa"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 2186585,
+      "num_examples": 2985,
+      "dataset_name": "cosmos_qa"
+    }
+  },
+  "version": {
+    "version_str": "0.1.0",
+    "major": 0,
+    "minor": 1,
+    "patch": 0
+  }
+}
