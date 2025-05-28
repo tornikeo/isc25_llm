@@ -14,5 +14,4 @@ evaluate
 #torch-rocm                  # Only if using AMD GPUs
 
 python-dotenv
-huggingface-cli
 huggingface_hub[hf_transfer]

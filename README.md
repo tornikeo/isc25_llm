@@ -141,28 +141,7 @@ export HF_TOKEN="your_token_here"
 
 4. Set up the cache directory for the model and datasets (Optional):
 ```bash
-export HF_HOME=/path/to/huggingface/cache
-
-```
-
-## Running the Competition Tasks
-
-### Time-to-Solution Benchmark
-```bash
-# For NVIDIA GPUs
-torchrun --nproc_per_node=8 main.py --benchmark speed --device-type cuda
-
-# For AMD GPUs
-python -m torch.distributed.launch --nproc_per_node=8 main.py --benchmark speed --device-type rocm
-
-# For Intel GPUs
-python -m intel_extension_for_pytorch.cpu.launch --nproc_per_node=8 main.py --benchmark speed --device-type xpu
-
-# For CPU-only
-python main.py --benchmark time --device-type cpu --precision fp32
-```
-The sample `run.sh` script is provided.
-
+export HF_HOME=/path/to/huggingface/cache./
 ### Accuracy Benchmark
 ```bash
 # Fine-tuning and evaluation
@@ -271,38 +250,7 @@ srun --partition=GPU_H200 --nodelist=gpu04sas --time=02:00:00 --pty bash
 module load container/apptainer/1.4.0
 
 # Pull the container
-apptainer pull docker://nvcr.io/nvidia/pytorch:25.01-py3
-
-# Run with NVIDIA Container Runtime
-docker run --gpus all \
-    --runtime=nvidia \
-    -v ${PWD}:/workspace \
-    nvcr.io/nvidia/pytorch:25.01-py3
-```
-
-The error:
-```sh
-INFO:    Inserting Apptainer configuration...
-INFO:    Creating SIF file...
-[==============================================================================] 100 % 0s
-FATAL:   While making image from oci registry: error fetching image to cache: while building SIF from layers: while creating SIF: while unloading container: close /home/fausion/.apptainer/cache/oci-tmp/tmp_2870822146: disk quota exceeded
-```
-
-is fixed by forcing apptainer to use only `/scratch`
-
-```sh
-export APPTAINER_CACHEDIR=/scratch
-
-# This one takes 20 mins or so...
-apptainer pull docker://nvcr.io/nvidia/pytorch:25.01-py3
-```
-
-```sh
-apptainer exec --workdir /scratch/tornikeo/workdir --nv pytorch_25.01-py3.sif bash
-```
-
-```sh
-mkdir -p /scratch/tornikeo/workdir
+apptainer pull docker://nvcr.io/nvidia/pytorch:25.01-py3./
 mkdir -p /scratch/tornikeo/tmp
 mkdir -p /scratch/tornikeo/cache
 export APPTAINER_TMPDIR=/scratch/tornikeo/tmp
@@ -360,9 +308,8 @@ export CURL_CA_BUNDLE=
 export PYTHONHTTPSVERIFY=0
 export APPTAINER_CACHEDIR=/scratch/tornikeo/cachehuggingface-cli download allenai/cosmos_qa --repo-type dataset
 
+export HF_HOME=/scratch/tornikeo/hf_home
 mkdir -p $HF_HOME
-# export HF_HOME=/scratch/tornikeo/hf_home
-# mkdir -p /scratch/tornikeo/hf_home
 
 git clone https://github.com/tornikeo/isc25_llm/
 cd isc25_llm
