@@ -81,7 +81,7 @@ class LoRAConfig:
 @dataclass
 class TrainingConfig:
     model_name: str = "meta-llama/Llama-3.1-8B"
-    speed_dataset: str = "./cosmos_qa"
+    speed_dataset: str = "allenai/cosmos_qa"
     accuracy_dataset: str = "lmms-lab/ScienceQA"
 
     precision: str = "bf16"
