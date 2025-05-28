@@ -264,7 +264,7 @@ ssh fausion@benchmarkcenter.megware.com
 # TODO: Ask why this was used?
 ssh tritium
 
-srun --partition=GPU_H200 --nodelist=gpu04sas --time=01:00:00 --pty bash
+srun --partition=GPU_H200 --nodelist=gpu04sas --time=02:00:00 --pty bash
 ```
 
 ```sh
@@ -344,25 +344,36 @@ You will get an SSL error. Try this:
 Apptainer> export CURL_CA_BUNDLE=
 ```
 
+
 # Compressed way
 
 ```sh
-mkdir -p /scratch/tornikeo/workdir
-mkdir -p /scratch/tornikeo/tmp
-mkdir -p /scratch/tornikeo/cache
-export APPTAINER_TMPDIR=/scratch/tornikeo/tmp
-export APPTAINER_CACHEDIR=/scratch/tornikeo/cache
-cd /scratch/tornikeo/workdir
+ssh fausion@benchmarkcenter.megware.com
+###
+srun --chdir=/scratch --partition=GPU_H200 --nodelist=gpu04sas --time=02:00:00 --pty bash
+###
+
 module load container/apptainer/1.4.0
-apptainer pull docker://nvcr.io/nvidia/pytorch:25.01-py3 || true
-apptainer exec --workdir /scratch/tornikeo/workdir   --nv pytorch_25.01-py3.sif bash
-```
+mkdir -p /scratch/tornikeo/workdir
 
-```sh
+export CURL_CA_BUNDLE=
+export PYTHONHTTPSVERIFY=0
+export APPTAINER_CACHEDIR=/scratch/tornikeo/cachehuggingface-cli download allenai/cosmos_qa --repo-type dataset
+
+mkdir -p $HF_HOME
+# export HF_HOME=/scratch/tornikeo/hf_home
+# mkdir -p /scratch/tornikeo/hf_home
+
+git clone https://github.com/tornikeo/isc25_llm/
 cd isc25_llm
+python -m venv .env
+source .env/bin/activate
 pip install -r requirements.txt
+
+export HF_TOKEN= ... 
+export HF_HUB_ENABLE_HF_TRANSFER=1
+huggingface-cli download allenai/cosmos_qa --repo-type dataset
+huggingface-cli download lmms-lab/ScienceQA --repo-type dataset
+huggingface-cli download meta-llama/Llama-3.1-8B
 ```
 
-TODO: cosmos_qa can't be loaded from the web. SSL error. What the hell. 
-
-Avoid modifying code as much as possible before this gets fixed.
