@@ -8,7 +8,9 @@ from src.dataset import load_dataset_for_training
 from src.hub_utils import HFSetup
 from src.evaluation import CausalLMEvaluator
 from config import TrainingConfig, HardwareConfig
+import ssl
 
+ssl._create_default_https_context = ssl._create_unverified_context
 
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
@@ -152,5 +154,6 @@ def main():
 
 
 if __name__ == "__main__":
+    ssl._create_default_https_context = ssl._create_unverified_context
     main()
 
