@@ -3,6 +3,7 @@ import logging
 import time
 import glob
 import torch
+from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import Trainer, TrainingArguments
 from .dataset import get_data_collator
 from .evaluation import CausalLMEvaluator
@@ -12,9 +13,9 @@ logger = logging.getLogger(__name__)
 
 
 class CustomTrainer:
-    def __init__(self, config, model, tokenizer, train_dataset, eval_dataset=None):
+    def __init__(self, config, model: DDP, tokenizer, train_dataset, eval_dataset=None):
         self.config = config
-        self.model = model
+        self.model: DDP = model
         self.tokenizer = tokenizer
         self.train_dataset = train_dataset
         self.eval_dataset = eval_dataset
@@ -84,7 +85,7 @@ class CustomTrainer:
             "epoch": epoch,
             # 'optimizer_state_dict': self.optimizer.state_dict(),
             # We need these two to verify your submission
-            "lora_state_dict": get_peft_model_state_dict(self.model),
+            "lora_state_dict": get_peft_model_state_dict(self.model.module if isinstance(self.model, DDP) else self.model),
             "config": self.config,
         }
 
