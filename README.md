@@ -298,7 +298,7 @@ Apptainer> export CURL_CA_BUNDLE=
 ```sh
 ssh fausion@benchmarkcenter.megware.com
 ###
-srun --chdir=/scratch --partition=GPU_H200 --nodelist=gpu04sas --time=02:00:00 --pty bash
+srun --chdir=/scratch --partition=GPU_H200 --nodelist=gpu04sas --time=04:00:00 --pty bash
 ###
 
 module load container/apptainer/1.4.0
@@ -306,21 +306,33 @@ mkdir -p /scratch/tornikeo/workdir
 
 export CURL_CA_BUNDLE=
 export PYTHONHTTPSVERIFY=0
-export APPTAINER_CACHEDIR=/scratch/tornikeo/cachehuggingface-cli download allenai/cosmos_qa --repo-type dataset
+export APPTAINER_CACHEDIR=/scratch/tornikeo/cache
+export HF_HOME=/scratch/tornikeo/hf_home
 
 export HF_HOME=/scratch/tornikeo/hf_home
 mkdir -p $HF_HOME
+mkdir -p /scratch/tornikeo/home
 
+apptainer pull docker://nvcr.io/nvidia/pytorch:25.01-py3
+apptainer exec --home /scratch/tornikeo/home --workdir /scratch/tornikeo/workdir --nv pytorch_25.01-py3.sif bash
+### 
 git clone https://github.com/tornikeo/isc25_llm/
 cd isc25_llm
-python -m venv .env
-source .env/bin/activate
 pip install -r requirements.txt
 
 export HF_TOKEN= ... 
 export HF_HUB_ENABLE_HF_TRANSFER=1
+export PATH=$HOME/.local/bin:$PATH
+
+export CURL_CA_BUNDLE=
+export PYTHONHTTPSVERIFY=0
+
 huggingface-cli download allenai/cosmos_qa --repo-type dataset
 huggingface-cli download lmms-lab/ScienceQA --repo-type dataset
 huggingface-cli download meta-llama/Llama-3.1-8B
+
+python -c "import torch; print(torch.cuda.is_available())"
+mkdir -p checkpoints
+torchrun --nproc_per_node=4 main.py --benchmark speed --device-type cuda --checkpoint checkpoints
 ```
 
