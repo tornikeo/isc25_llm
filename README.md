@@ -334,6 +334,8 @@ huggingface-cli download meta-llama/Llama-3.1-8B
 
 python -c "import torch; print(torch.cuda.is_available())"
 mkdir -p checkpoints
-torchrun --nproc_per_node=4 main.py --benchmark speed --device-type cuda --checkpoint checkpoints
+
+CUDA_VISIBLE_DEVICES=2,3,4,5 torchrun --nproc_per_node=4 main.py --benchmark accuracy --device-type cuda 
+CUDA_VISIBLE_DEVICES=2,3,4,5 torchrun --nproc_per_node=4 main.py --benchmark speed --device-type cuda 
 ```
 
