@@ -326,6 +326,7 @@ export PATH=$HOME/.local/bin:$PATH
 
 export CURL_CA_BUNDLE=
 export PYTHONHTTPSVERIFY=0
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 huggingface-cli download allenai/cosmos_qa --repo-type dataset
 huggingface-cli download lmms-lab/ScienceQA --repo-type dataset
