@@ -57,7 +57,7 @@ class CausalLMMultipleChoiceDataset(Dataset):
         self.max_prompt_length = max_length - self.max_answer_length
 
     def _format_prompt(self, example: Dict) -> str:
-        if self.dataset_name == "cosmos_qa":
+        if self.dataset_name == "allenai/cosmos_qa":
             context = example["context"]
             question = example["question"]
             choices = [
