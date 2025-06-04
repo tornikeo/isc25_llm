@@ -361,7 +361,7 @@ huggingface-cli download lmms-lab/ScienceQA --repo-type dataset
 python -c "import torch; print(torch.cuda.is_available())"
 mkdir -p checkpoints
 
-torchrun --nproc_per_node=2 main.py --benchmark speed --device-type cuda 
-torchrun --nproc_per_node=2 main.py --benchmark accuracy --device-type cuda 
+torchrun --nproc_per_node=auto main.py --benchmark speed --device-type cuda 
+torchrun --nproc_per_node=auto main.py --benchmark accuracy --device-type cuda 
 ```
 
