@@ -339,3 +339,29 @@ CUDA_VISIBLE_DEVICES=2,3,4,5 torchrun --nproc_per_node=4 main.py --benchmark acc
 CUDA_VISIBLE_DEVICES=2,3,4,5 torchrun --nproc_per_node=4 main.py --benchmark speed --device-type cuda 
 ```
 
+
+# <> Helium <>
+
+```sh
+ssh tonoprishvili@hydrogen
+ssh deuterium
+
+git clone https://github.com/tornikeo/isc25_llm/
+apptainer pull docker://nvcr.io/nvidia/pytorch:25.01-py3
+apptainer exec --nv pytorch_25.01-py3.sif bash
+pip install -r requirements.txt
+
+export HF_TOKEN= ... 
+
+export HF_HUB_ENABLE_HF_TRANSFER=1
+huggingface-cli download meta-llama/Llama-3.1-8B
+huggingface-cli download allenai/cosmos_qa --repo-type dataset
+huggingface-cli download lmms-lab/ScienceQA --repo-type dataset
+
+python -c "import torch; print(torch.cuda.is_available())"
+mkdir -p checkpoints
+
+torchrun --nproc_per_node=2 main.py --benchmark speed --device-type cuda 
+torchrun --nproc_per_node=2 main.py --benchmark accuracy --device-type cuda 
+```
+
