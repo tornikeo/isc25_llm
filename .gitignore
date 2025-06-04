@@ -172,3 +172,5 @@ cython_debug/
 
 tmp-dataset/
 private.md
+*.sif
+checkpoints/*
