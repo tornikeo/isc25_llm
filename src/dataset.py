@@ -57,7 +57,7 @@ class CausalLMMultipleChoiceDataset(Dataset):
         self.max_prompt_length = max_length - self.max_answer_length
 
     def _format_prompt(self, example: Dict) -> str:
-        if self.dataset_name == "allenai/cosmos_qa":
+        if self.dataset_name in ["allenai/cosmos_qa", "TornikeO/cosmos_qa"]:
             context = example["context"]
             question = example["question"]
             choices = [
@@ -67,7 +67,7 @@ class CausalLMMultipleChoiceDataset(Dataset):
                 example["answer3"],
             ]
             label = example["label"]
-        else:  # science_qa
+        elif self.dataset_name == 'lmms-lab/ScienceQA':  # science_qa
             context = example.get("lecture", "")
             question = example["question"]
             choices = example["choices"]
@@ -75,7 +75,8 @@ class CausalLMMultipleChoiceDataset(Dataset):
 
             if example.get("hint"):
                 context = f"{context}\nHint: {example['hint']}"
-
+        else:
+          raise ValueError(f"self.dataset_name={self.dataset_name} is not supported.")
         # Format options
         options_text = "\n".join(
             self.prompt_config.options_format.format(idx=i + 1, choice=choice)
