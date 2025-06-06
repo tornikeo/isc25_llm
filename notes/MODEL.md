@@ -77,6 +77,18 @@ We know our budget of ComputeFlops to be 3.8e25 . Therefore, Tokens(ComputeFlops
 
 What is the model size? We get the model size from $Parameters = ComputeFlops / (6 * Tokens)$. This is $ 3.8e25 / (6 * 1.62935223e13 ) = 3.8870253e11$. 
 
-This suggests training a 388 B parameter model. But they round this up to 405B, possibly due to better fitting it to GPUs?
+This suggests training a 388 B (in paper 402B, because they don't give more digits of 0.537... fitted parameter alpha, and 402B is appartently sensitive to this) parameter model. But they round this up to 405B, possibly due to better fitting it to GPUs?
 
 **How to calculate Model Flop Utilization?** Chowdhery et al. 2023. 
+
+# Inference 
+
+H100 has native fp8 support. Meta used that for training. FP8 quantization was applied to most matrix multiplications inside model. mat muls were 50% of inference time. 
+
+Attention layers are not quantized. Feedforward network layers are quantized. 
+
+First and last Transformer layers are not quantized.
+
+**High-perplexity tokens such as dates can lead to large activation values.** To address this issue, we upper bound the dynamic scaling factors to 1200.
+
+Row-wise quantization works better than tensor-wise. 
