@@ -1,0 +1,24 @@
+nohup: ignoring input
+W0606 19:33:53.826000 49576 torch/distributed/run.py:792] 
+W0606 19:33:53.826000 49576 torch/distributed/run.py:792] *****************************************
+W0606 19:33:53.826000 49576 torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0606 19:33:53.826000 49576 torch/distributed/run.py:792] *****************************************
+2025-06-06 19:34:03,416 - INFO - Cache directories configured at: /home/tonoprishvili/hf_cache
+2025-06-06 19:34:03,420 - INFO - Cache directories configured at: /home/tonoprishvili/hf_cache
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+2025-06-06 19:34:03,609 - WARNING - Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+[rank1]:[W606 19:34:04.273638045 ProcessGroupNCCL.cpp:4454] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W606 19:34:04.470301448 ProcessGroupNCCL.cpp:4454] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+2025-06-06 19:34:07,562 - INFO - Initializing new model
+2025-06-06 19:34:07,562 - INFO - Initializing new model
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 135.89it/s]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 136.42it/s]
+2025-06-06 19:34:08,963 - INFO - Wrapping the model with parallelism
+2025-06-06 19:34:08,963 - INFO - Wrapping the model with parallelism
+2025-06-06 19:34:14,063 - INFO - Loading dataset TornikeO/cosmos_qa (all split)
+2025-06-06 19:34:14,063 - INFO - Loading dataset TornikeO/cosmos_qa (all split)
+2025-06-06 19:34:16,842 - INFO - Loaded 35210 examples
+2025-06-06 19:34:16,843 - INFO - Training ...
+2025-06-06 19:34:16,928 - INFO - Loaded 35210 examples
+2025-06-06 19:34:16,928 - INFO - Training ...
+  0%|          | 0/64 [00:00<?, ?it/s]  2%|▏         | 1/64 [00:05<05:48,  5.53s/it]  3%|▎         | 2/64 [00:10<05:09,  4.99s/it]  5%|▍         | 3/64 [00:14<04:51,  4.78s/it]  6%|▋         | 4/64 [00:19<04:40,  4.68s/it]  8%|▊         | 5/64 [00:23<04:32,  4.63s/it]  9%|▉         | 6/64 [00:28<04:26,  4.60s/it] 11%|█         | 7/64 [00:32<04:20,  4.58s/it] 12%|█▎        | 8/64 [00:37<04:15,  4.57s/it] 14%|█▍        | 9/64 [00:41<04:10,  4.56s/it]
