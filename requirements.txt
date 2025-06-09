@@ -16,3 +16,7 @@ evaluate
 python-dotenv
 huggingface_hub[hf_transfer]
 mlflow
+accelerate
+ipykernel
+transformer_engine[pytorch]
+jupyterlab
