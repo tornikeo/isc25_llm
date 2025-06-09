@@ -351,7 +351,8 @@ module load cuda...
 git clone https://github.com/tornikeo/isc25_llm/
 apptainer pull docker://nvcr.io/nvidia/pytorch:25.01-py3
 apptainer exec --nv pytorch_25.01-py3.sif bash
-pip install --use-feature=truststore -r requirements.txt
+
+pip install --use-feature=truststore --no-build-isolation -r requirements.txt
 
 git config --global user.email tornikeonoprishvili@gmail.com
 git config --global user.name tornikeo
@@ -374,5 +375,11 @@ torchrun --nproc_per_node=auto main.py --benchmark accuracy --device-type cuda -
 # OR
 torchrun --nproc_per_node=auto main.py --benchmark accuracy --device-type cuda --checkpoint checkpoints
 torchrun --nproc_per_node=auto main.py --benchmark accuracy --device-type cuda 
+# 
+srun apptainer exec --nv pytorch_25.01-py3.sif torchrun --nproc_per_node=auto main.py --benchmark speed --device-type cuda
 ```
 
+3 modes: (check best s/iter)
+350 W x 8 GPUs 1 Node
+350 W x 12 GPUs 2 Node
+300 W x 12 GPUs 2 Node

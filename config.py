@@ -90,8 +90,8 @@ class TrainingConfig:
     num_epochs: int = 2
     gradient_accumulation_steps: int = 4
     max_length = 512
-    max_steps = 64 # set to 1 for debug
-    checkpoint_freq: int = 1
+    max_steps = 32 # set to 1 for debug
+    checkpoint_freq: int = 9999
     checkpoint_dir: str = "checkpoints"
 
     cache: CacheConfig = field(default_factory=CacheConfig)

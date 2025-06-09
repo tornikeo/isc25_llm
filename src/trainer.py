@@ -3,6 +3,7 @@ import logging
 import time
 import glob
 import torch
+import yaml
 from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import Trainer, TrainingArguments
 from .dataset import get_data_collator
@@ -24,6 +25,7 @@ class CustomTrainer:
         )
 
     def train_speed(self, local_rank):
+        # accelerator_config = yaml.safe_load(open('default_config.yaml', 'r'))
         training_args = TrainingArguments(
             output_dir=self.config.checkpoint_dir,
             num_train_epochs=self.config.num_epochs,
@@ -31,6 +33,8 @@ class CustomTrainer:
             per_device_train_batch_size=self.config.batch_size,
             gradient_accumulation_steps=self.config.gradient_accumulation_steps,
             optim="adamw_torch_fused",
+            # accelerator_config='default_config.yaml',
+            # accelerator_config=accelerator_config,
             learning_rate=self.config.learning_rate,
             fp16=self.config.precision == "fp16",
             bf16=self.config.precision == "bf16",
